@@ -1,0 +1,34 @@
+<!doctype html>
+<title>Simple string file store</title>
+<link rel="stylesheet" href="style.css">
+
+<header>
+  <h1>SSE Sign-off Task: PaaS Datastore API</h1>
+  <p>This app stores numerical values in name.
+</header>
+
+<section>
+  <div title="toggle the file selector box"></div>
+  <header>
+    <h1>Select a list of registers:</h1>
+  </header>
+  <select>
+    <option>loading
+  </select>
+  <p>or write a new register here:</p>
+  <input autofocus title="only accepts digits and letters a-z" pattern="[a-zA-Z0-9_]+">
+  <span>only use digits please</span>
+  <p>state a value here:</p>
+  <input autofocus title="only accepts digits and letters a-z" pattern="[a-zA-Z0-9_]+">
+  <button>Save</button>
+</section>
+
+  <section>
+  <button>View Register</button>
+  <button>Set Register Value</button>
+  <button>Add Value to Register</button>
+  <button>Delete Register</button>
+  
+</section>
+
+<script src="script.js"></script>
