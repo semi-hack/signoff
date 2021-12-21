@@ -2,11 +2,19 @@
 
 const express = require('express');
 const api = express.Router();
-const pool = require('./db.js');
+const poolPromise = require('./db.js');
+
+const pool = await poolPromise()
+
 
 api.post('/v1/age', async (req, res) => {
 
+
     try {
+        const result = await pool.query("SELECT * FROM register WHERE name = ($1)", [req.body.name])
+        if (result) {
+            res.send("exists")
+        }
         const { age } = req.body;
         const newAge = await pool.query("INSERT INTO register (age) VALUES ($1) RETURNING *", [age])
     
@@ -17,11 +25,21 @@ api.post('/v1/age', async (req, res) => {
    
 })
 
-// api.post('/v1/mark', async (req, res) => {
-//     try {
+api.post('/v1/mark', async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM register WHERE name = ($1)", [req.body.name])
+        if (result) {
+            res.send("exists")
+        }
+        const { mark } = req.body;
+        const newAge = await pool.query("INSERT INTO register (mark) VALUES ($1) RETURNING *", [mark])
+    
+        res.send(newAge.rows[0])
 
-//     }
-// })
+    } catch (err) {
+        console.error(err.message)
+    }
+})
 
 api.get('/v1/age',  async (req, res) => {
 
